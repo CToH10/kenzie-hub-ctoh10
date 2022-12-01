@@ -1,13 +1,11 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
+import { RoutesComp } from "./routes";
 
 function App() {
+  window.document.title = "KenzieHub";
   return (
     <div className="App">
       <header className="App-header">
-        <Routes>
-          <Route />
-        </Routes>
+        <RoutesComp />
       </header>
     </div>
   );
