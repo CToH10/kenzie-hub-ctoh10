@@ -10,10 +10,11 @@ export const StyledModal = Modal.styled`
     border: 1px solid var(--grey-3);
     border-radius: 4px;
     position: relative;
-    top: 20%;
-    bottom: 50%;
-    left: 7%;
-    right: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 87vw;
     height: 48vh;
+    max-width: 610px;
+
 `;

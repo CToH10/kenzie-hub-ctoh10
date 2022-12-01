@@ -6,6 +6,7 @@ export const StyledHeader = styled.header`
   justify-content: center;
   margin: 1.5vh auto 4vh;
   width: 90%;
+  max-width: 880px;
 
   h1 {
     color: var(--color-primary);

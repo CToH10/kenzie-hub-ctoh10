@@ -12,6 +12,7 @@ export const FormsMain = styled(StyledMain)`
   height: fit-content;
   position: relative;
   top: 5vh;
+  max-width: 580px;
 
   h2 {
     color: var(--grey-0);
@@ -47,6 +48,8 @@ export const StyledForm = styled.form`
   flex-direction: column;
   gap: 2vh;
   padding: 1.5vh 1vw;
+  width: 100%;
+  max-width: 520px;
 
   label {
     color: var(--grey-0);
@@ -62,7 +65,10 @@ export const StyledForm = styled.form`
     border-radius: 4px;
     background-color: var(--grey-2);
     color: var(--grey-0);
-    padding: 1.5vh 2vw;
+    padding-left: clamp(5px, 2vw, 15px);
+    padding-right: clamp(5px, 2vw, 15px);
+    padding-top: clamp(5px, 1.5vh, 10px);
+    padding-bottom: clamp(5px, 1.5vh, 10px);
   }
 
   select {
@@ -70,7 +76,10 @@ export const StyledForm = styled.form`
     border-radius: 4px;
     background-color: var(--grey-2);
     color: var(--grey-0);
-    padding: 1.5vh 2vw;
+    padding-left: clamp(5px, 2vw, 15px);
+    padding-right: clamp(5px, 2vw, 15px);
+    padding-top: clamp(5px, 1.5vh, 10px);
+    padding-bottom: clamp(5px, 1.5vh, 10px);
   }
 
   input::placeholder {
@@ -81,10 +90,6 @@ export const StyledForm = styled.form`
   select:focus {
     outline: none;
   }
-
-  /* input:: {
-    background-color: var(--grey-2);
-  } */
 
   button {
     background: var(--color-primary);
@@ -97,5 +102,10 @@ export const StyledForm = styled.form`
   button:disabled {
     background: var(--color-primary-disabled);
     border: 1px solid var(--color-primary-disabled);
+  }
+
+  button:hover {
+    background: var(--color-primary-50);
+    border: 1px solid var(--color-primary-50);
   }
 `;

@@ -3,8 +3,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { formSchema } from "./LoginSchema";
 import { Input } from "../../Input/input";
 import { StyledForm } from "../style";
+import { Button } from "../../Button";
 
-export function LoginForm({ loginUser }) {
+export function LoginForm({ loginUser, load }) {
   const {
     register,
     handleSubmit,
@@ -21,7 +22,7 @@ export function LoginForm({ loginUser }) {
         register={register("email")}
       />
       {errors.email?.message && (
-        <label for="email" className="errorLabel">
+        <label htmlFor="email" className="errorLabel">
           {errors.email.message}
         </label>
       )}
@@ -33,11 +34,11 @@ export function LoginForm({ loginUser }) {
         register={register("password")}
       />
       {errors.password?.message && (
-        <label for="password" className="errorLabel">
+        <label htmlFor="password" className="errorLabel">
           {errors.password.message}
         </label>
       )}
-      <button type="submit">Entrar</button>
+      <Button type="submit" load={load} text="Entrar"></Button>
     </StyledForm>
   );
 }

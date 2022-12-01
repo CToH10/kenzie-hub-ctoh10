@@ -10,7 +10,7 @@ import { StyledModal } from "../../components/Modal/style";
 import { NewTech } from "../../components/Form/NewTech/NewTech";
 import { DashMain, StyledList } from "./style";
 
-export function DashPage() {
+export function DashPage({ noUser, userState }) {
   const localUser = JSON.parse(window.localStorage.getItem("userID"));
   const token = JSON.parse(window.localStorage.getItem("token"));
   const [list, setList] = useState([]);
@@ -19,6 +19,9 @@ export function DashPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!userState) {
+      navigate("/login");
+    }
     async function getInfo() {
       try {
         let info = await api.get(`/users/${localUser}`);
@@ -31,7 +34,7 @@ export function DashPage() {
     }
 
     getInfo();
-  }, [localUser]);
+  }, [localUser, navigate, userState]);
 
   async function removeTech(id) {
     const headers = {
@@ -54,6 +57,7 @@ export function DashPage() {
   function logOut() {
     setUser("");
     setList([]);
+    noUser(false);
     window.localStorage.clear();
     navigate("/login");
   }

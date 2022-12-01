@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../../Input/input";
 import { StyledForm } from "../style";
 
-export function RegisterForm({ onSubmit }) {
+export function RegisterForm({ onSubmit, load }) {
   const {
     register,
     handleSubmit,
@@ -22,7 +22,7 @@ export function RegisterForm({ onSubmit }) {
         id={"name"}
       />
       {errors.name?.message && (
-        <label for="name" className="errorLabel">
+        <label htmlFor="name" className="errorLabel">
           {errors.name.message}
         </label>
       )}
@@ -34,7 +34,7 @@ export function RegisterForm({ onSubmit }) {
         id={"email"}
       />
       {errors.email?.message && (
-        <label for="email" className="errorLabel">
+        <label htmlFor="email" className="errorLabel">
           {errors.email.message}
         </label>
       )}
@@ -46,7 +46,7 @@ export function RegisterForm({ onSubmit }) {
         id={"password"}
       />
       {errors.password?.message && (
-        <label for="password" className="errorLabel">
+        <label htmlFor="password" className="errorLabel">
           {errors.password.message}
         </label>
       )}
@@ -58,7 +58,7 @@ export function RegisterForm({ onSubmit }) {
         id={"passwordConfirmation"}
       />
       {errors.passwordConfirmation?.message && (
-        <label for="passwordConfirmation">
+        <label htmlFor="passwordConfirmation">
           {errors.passwordConfirmation.message}
         </label>
       )}
@@ -70,7 +70,7 @@ export function RegisterForm({ onSubmit }) {
         id={"bio"}
       />
       {errors.bio?.message && (
-        <label for="" className="errorLabel">
+        <label htmlFor="" className="errorLabel">
           {errors.bio.message}
         </label>
       )}
@@ -82,7 +82,7 @@ export function RegisterForm({ onSubmit }) {
         id={"contact"}
       />
       {errors.contact?.message && (
-        <label for="contact" className="errorLabel">
+        <label htmlFor="contact" className="errorLabel">
           {errors.contact.message}
         </label>
       )}
@@ -102,11 +102,11 @@ export function RegisterForm({ onSubmit }) {
         </optgroup>
       </select>
       {errors.course_module?.message && (
-        <label for="course_module" className="errorLabel">
+        <label htmlFor="course_module" className="errorLabel">
           {errors.course_module.message}
         </label>
       )}
-      <Button text="Cadastrar" />
+      <Button text="Cadastrar" load={load} />
     </StyledForm>
   );
 }

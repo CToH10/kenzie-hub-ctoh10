@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,8 +8,10 @@ import { FormsMain } from "../../components/Form/style";
 
 export function RegisterPage() {
   const navigate = useNavigate();
+  const [load, setLoad] = useState(false);
 
   async function registerUser(apiBody) {
+    setLoad(true);
     try {
       let registerProcess = await api.post("/users", apiBody);
 
@@ -19,6 +21,8 @@ export function RegisterPage() {
       }
     } catch (err) {
       toast.error(err.response.data.message);
+    } finally {
+      setLoad(false);
     }
   }
 
@@ -35,7 +39,7 @@ export function RegisterPage() {
       <FormsMain>
         <h2>Crie sua conta</h2>
         <p>Rápido e grátis, vamos nessa</p>
-        <RegisterForm onSubmit={onSubmit} />
+        <RegisterForm onSubmit={onSubmit} load={load} />
       </FormsMain>
     </>
   );

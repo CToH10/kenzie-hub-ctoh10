@@ -50,7 +50,7 @@ export function NewTech({ token, action, newList, id }) {
         register={register("title")}
       />
       {errors.title?.message && (
-        <label className="errorLabel" for="title">
+        <label className="errorLabel" htmlFor="title">
           {errors.title.message}
         </label>
       )}
@@ -65,7 +65,7 @@ export function NewTech({ token, action, newList, id }) {
         <option value="Sênior">Sênior</option>
       </select>
       {errors.status?.message && (
-        <label className="errorLabel" for="status">
+        <label className="errorLabel" htmlFor="status">
           {errors.status.message}
         </label>
       )}

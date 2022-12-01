@@ -5,6 +5,7 @@ export const DashMain = styled(StyledMain)`
   display: flex;
   flex-direction: column;
   gap: 4vh;
+  max-width: 880px;
   .greetings {
     display: flex;
     flex-direction: column;
@@ -36,6 +37,8 @@ export const DashMain = styled(StyledMain)`
     border-radius: 4px;
     width: 10vw;
     height: 4vh;
+    max-width: 40px;
+    max-height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,14 +55,20 @@ export const StyledList = styled.ul`
   gap: 3vh;
   background-color: var(--grey-3);
   border-radius: 4px;
-  padding: 1.5vh 2vw;
+  padding-left: clamp(5px, 2vw, 15px);
+  padding-right: clamp(5px, 2vw, 15px);
+  padding-top: clamp(5px, 1.5vh, 10px);
+  padding-bottom: clamp(5px, 1.5vh, 10px);
 
   li {
     background-color: var(--grey-4);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5vh 2vw;
+    padding-left: clamp(5px, 2vw, 15px);
+    padding-right: clamp(5px, 2vw, 15px);
+    padding-top: clamp(5px, 1.5vh, 10px);
+    padding-bottom: clamp(5px, 1.5vh, 10px);
     border-radius: 4px;
   }
 
@@ -88,5 +97,7 @@ export const StyledList = styled.ul`
     background-color: inherit;
     width: 10vw;
     height: 4vh;
+    max-width: 40px;
+    max-height: 30px;
   }
 `;
