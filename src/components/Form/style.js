@@ -103,4 +103,9 @@ export const StyledForm = styled.form`
     background: var(--color-primary-disabled);
     border: 1px solid var(--color-primary-disabled);
   }
+
+  button:hover {
+    background: var(--color-primary-50);
+    border: 1px solid var(--color-primary-50);
+  }
 `;
