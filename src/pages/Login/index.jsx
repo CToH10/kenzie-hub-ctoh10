@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -9,8 +9,10 @@ import { FormsMain } from "../../components/Form/style";
 
 export function LoginPage({ setUser }) {
   const navigate = useNavigate();
+  const [load, setLoad] = useState(false);
 
   async function loginUser(body) {
+    setLoad(true);
     try {
       let loginProcess = await api.post("/sessions", body);
 
@@ -22,7 +24,6 @@ export function LoginPage({ setUser }) {
         "userID",
         JSON.stringify(loginProcess.data.user.id)
       );
-      // estado de usuário no app pra caso tenha redicionar pra dashboard
       if (loginProcess.data.token) {
         toast.success("Login realizado");
         setUser(true);
@@ -30,6 +31,8 @@ export function LoginPage({ setUser }) {
       }
     } catch (err) {
       toast.error(err.response.data.message);
+    } finally {
+      setLoad(false);
     }
   }
 
@@ -38,7 +41,7 @@ export function LoginPage({ setUser }) {
       <Header />
       <FormsMain>
         <h2>Login</h2>
-        <LoginForm loginUser={loginUser} />
+        <LoginForm loginUser={loginUser} load={load} />
         <section className="noAccount">
           <p>Ainda não possui uma conta?</p>
           <Link to={"/register"}>Cadastre-se</Link>

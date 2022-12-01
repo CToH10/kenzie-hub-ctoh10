@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../../Input/input";
 import { StyledForm } from "../style";
 
-export function RegisterForm({ onSubmit }) {
+export function RegisterForm({ onSubmit, load }) {
   const {
     register,
     handleSubmit,
@@ -106,7 +106,7 @@ export function RegisterForm({ onSubmit }) {
           {errors.course_module.message}
         </label>
       )}
-      <Button text="Cadastrar" />
+      <Button text="Cadastrar" load={load} />
     </StyledForm>
   );
 }
