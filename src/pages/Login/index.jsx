@@ -7,7 +7,7 @@ import { Header } from "../../components/Header";
 import { LoginForm } from "../../components/Form/Login";
 import { FormsMain } from "../../components/Form/style";
 
-export function LoginPage() {
+export function LoginPage({ setUser }) {
   const navigate = useNavigate();
 
   async function loginUser(body) {
@@ -25,6 +25,7 @@ export function LoginPage() {
       // estado de usuário no app pra caso tenha redicionar pra dashboard
       if (loginProcess.data.token) {
         toast.success("Login realizado");
+        setUser(true);
         return navigate("/dashboard");
       }
     } catch (err) {

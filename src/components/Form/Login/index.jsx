@@ -21,7 +21,7 @@ export function LoginForm({ loginUser }) {
         register={register("email")}
       />
       {errors.email?.message && (
-        <label for="email" className="errorLabel">
+        <label htmlFor="email" className="errorLabel">
           {errors.email.message}
         </label>
       )}
@@ -33,7 +33,7 @@ export function LoginForm({ loginUser }) {
         register={register("password")}
       />
       {errors.password?.message && (
-        <label for="password" className="errorLabel">
+        <label htmlFor="password" className="errorLabel">
           {errors.password.message}
         </label>
       )}
