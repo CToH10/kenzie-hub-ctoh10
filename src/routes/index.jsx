@@ -5,7 +5,7 @@ import { LoginPage } from "../pages/Login";
 import { RegisterPage } from "../pages/Register";
 
 export function RoutesComp() {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(window.localStorage.getItem("userID"));
   return (
     <Routes>
       <Route path="/login" element={<LoginPage setUser={setUser} />} />
