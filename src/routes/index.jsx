@@ -14,7 +14,10 @@ export function RoutesComp() {
         path="/dashboard"
         element={<DashPage noUser={setUser} userState={user} />}
       />
-      <Route path="*" element={<LoginPage setUser={setUser} />} />
+      <Route
+        path="*"
+        element={<DashPage noUser={setUser} userState={user} />}
+      />
     </Routes>
   );
 }
