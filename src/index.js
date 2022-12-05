@@ -8,27 +8,30 @@ import { BrowserRouter } from "react-router-dom";
 import { ModalProvider } from "styled-react-modal";
 import { SpecialModalBackground } from "./ModalProvider";
 import { Global } from "./GlobalStyles";
+import { UserProvider } from "./Contexts/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Global />
-      <ModalProvider backgroundComponent={SpecialModalBackground}>
-        <App />
-        <ToastContainer
-          position="bottom-right"
-          autoClose={2000}
-          hideProgressBar={true}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
-      </ModalProvider>
+      <UserProvider>
+        <Global />
+        <ModalProvider backgroundComponent={SpecialModalBackground}>
+          <App />
+          <ToastContainer
+            position="bottom-right"
+            autoClose={2000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
+        </ModalProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

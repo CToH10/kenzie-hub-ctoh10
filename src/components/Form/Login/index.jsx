@@ -5,7 +5,11 @@ import { Input } from "../../Input/input";
 import { StyledForm } from "../style";
 import { Button } from "../../Button";
 
-export function LoginForm({ loginUser, load }) {
+import { useContext } from "react";
+import { UserContext } from "../../../Contexts/UserContext";
+
+export function LoginForm() {
+  const { loginUser, load } = useContext(UserContext);
   const {
     register,
     handleSubmit,

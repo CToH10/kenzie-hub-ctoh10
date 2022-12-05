@@ -10,6 +10,8 @@ import { StyledModal } from "../../components/Modal/style";
 import { NewTech } from "../../components/Form/NewTech/NewTech";
 import { DashMain, StyledList } from "./style";
 
+//routes not working
+
 export function DashPage({ noUser, userState }) {
   const localUser = JSON.parse(window.localStorage.getItem("userID"));
   const token = JSON.parse(window.localStorage.getItem("token"));
