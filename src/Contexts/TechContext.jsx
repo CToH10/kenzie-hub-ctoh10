@@ -1,24 +1,47 @@
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
 export const TechContext = createContext({});
 
 export function TechProvider({ children }) {
   const [list, setList] = useState([]);
-  const [user, setUser] = useState(
-    JSON.parse(window.localStorage.getItem("userID"))
-  );
-  const [token, setToken] = useState(
-    JSON.parse(window.localStorage.getItem("token"))
-  );
+  const { user, setUser } = useContext(UserContext);
+  const token = JSON.parse(window.localStorage.getItem("token"));
+  const [userInfo, setUserInfo] = useState([]);
+  const navigate = useNavigate();
 
   async function getInfo() {
     try {
       let info = await api.get(`/users/${user}`);
+      setUserInfo(info.data);
       setList(info.data.techs);
     } catch (err) {
-      toast.err(err.response.data.message);
+      toast.error(err.response.data.message);
+    }
+  }
+
+  async function addTech(techBody) {
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer: ${token}`,
+      },
+    };
+
+    try {
+      let addProcess = await api.post("/users/techs", techBody, headers);
+      // let upList = await api.get(`/users/${user}`);
+      if (addProcess.status === 201) {
+        toast.success("Tecnologia adicionada");
+        // setList(upList.data.techs);
+      }
+    } catch (err) {
+      // console.log(err);
+      toast.error(err.response.data.message);
     }
   }
 
@@ -48,8 +71,26 @@ export function TechProvider({ children }) {
     }
   }
 
+  function logOut() {
+    setList([]);
+    setUser(false);
+    window.localStorage.clear();
+    navigate("/login");
+  }
+
   return (
-    <TechContext.Provider value={{ list, getInfo, removeTech, editTech }}>
+    <TechContext.Provider
+      value={{
+        list,
+        getInfo,
+        removeTech,
+        editTech,
+        userInfo,
+        logOut,
+        token,
+        addTech,
+      }}
+    >
       {children}
     </TechContext.Provider>
   );

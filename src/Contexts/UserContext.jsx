@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export const UserContext = createContext({});
 
@@ -9,8 +10,13 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(
     JSON.parse(window.localStorage.getItem("userID"))
   );
+
   const [load, setLoad] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setUser(JSON.parse(window.localStorage.getItem("userID")));
+  }, [user]);
 
   async function loginUser(body) {
     setLoad(true);
@@ -27,8 +33,8 @@ export function UserProvider({ children }) {
       );
       if (loginProcess.data.token) {
         toast.success("Login realizado");
-        setUser(true);
-        return navigate("/dashboard");
+        setUser(loginProcess.data.user.id);
+        navigate("/dashboard");
       }
     } catch (err) {
       toast.error(err.response.data.message);

@@ -1,67 +1,69 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { Button } from "../../components/Button";
 import { TechCard } from "../../components/Tech";
-import { api } from "../../services/api";
+// import { api } from "../../services/api";
 import { HiOutlinePlus } from "react-icons/hi";
 import { ButtonHeader, ModalHeader } from "../../components/Header";
 import { StyledModal } from "../../components/Modal/style";
 import { NewTech } from "../../components/Form/NewTech/NewTech";
 import { DashMain, StyledList } from "./style";
+import { useContext } from "react";
+import { UserContext } from "../../Contexts/UserContext";
+import { TechContext } from "../../Contexts/TechContext";
 
-//routes not working
+//routes not working ???? they work when they want to
 
-export function DashPage({ noUser, userState }) {
-  const localUser = JSON.parse(window.localStorage.getItem("userID"));
-  const token = JSON.parse(window.localStorage.getItem("token"));
-  const [list, setList] = useState([]);
-  const [user, setUser] = useState("");
+export function DashPage() {
+  // const token = JSON.parse(window.localStorage.getItem("token"));
+  // const [list, setList] = useState([]);
+  const { user, setUser } = useContext(UserContext);
+  const { getInfo, list, removeTech, userInfo, logOut } =
+    useContext(TechContext);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userState) {
+    if (!user) {
       navigate("/login");
+    } else {
+      getInfo();
     }
-    async function getInfo() {
-      try {
-        let info = await api.get(`/users/${localUser}`);
+    // async function getInfo() {
+    //   try {
+    //     if (user === true) {
+    //       console.log("au");
+    //     }
+    //     let info = await api.get(`/users/${user}`);
 
-        setList(info.data.techs);
-        setUser(info.data);
-      } catch (err) {
-        toast.error(err.response.data.message);
-      }
-    }
+    //     setList(info.data.techs);
+    //     setUserInfo(info.data);
+    //   } catch (err) {
+    //     toast.error(err.response.data.message);
+    //   }
+    // }
+  }, [user, navigate, setUser, getInfo, userInfo]);
 
-    getInfo();
-  }, [localUser, navigate, userState]);
-
-  async function removeTech(id) {
-    const headers = {
-      Authorization: `Bearer: ${token}`,
-    };
-    try {
-      await api.delete(`/users/techs/${id}`, { headers });
-      let newList = list.filter((tech) => tech.id !== id);
-      toast.success("Tech excluída com sucesso");
-      setList(newList);
-    } catch (err) {
-      toast.err(err.message);
-    }
-  }
+  // async function removeTech(id) {
+  //   const headers = {
+  //     Authorization: `Bearer: ${token}`,
+  //   };
+  //   try {
+  //     await api.delete(`/users/techs/${id}`, { headers });
+  //     let newList = list.filter((tech) => tech.id !== id);
+  //     toast.success("Tech excluída com sucesso");
+  //     setList(newList);
+  //   } catch (err) {
+  //     toast.err(err.message);
+  //   }
+  // }
 
   function toggleModal(e) {
+    // console.log(e.target === "li" || e.target === "h3" || e.target === "p");
+    // let arr = [...e.nativeEvent.path];
+    // console.log(arr[0].localName);
     setIsOpen(!isOpen);
-  }
-
-  function logOut() {
-    setUser("");
-    setList([]);
-    noUser(false);
-    window.localStorage.clear();
-    navigate("/login");
   }
 
   return (
@@ -71,12 +73,15 @@ export function DashPage({ noUser, userState }) {
       </ButtonHeader>
       <DashMain>
         <section className="greetings">
-          <h2>Olá, {user.name}</h2>
-          <p>{user.course_module}</p>
+          <h2>Olá, {userInfo.name}</h2>
+          <p>{userInfo.course_module}</p>
         </section>
         <section className="techs">
           <h3>Tecnologias</h3>
-          <Button text={<HiOutlinePlus color="white" />} action={toggleModal} />
+          <Button
+            text={<HiOutlinePlus color="white" />}
+            action={() => toggleModal("open")}
+          />
         </section>
         <section className="listTechs">
           {list.length !== 0 && (
@@ -84,9 +89,12 @@ export function DashPage({ noUser, userState }) {
               {list.map((tech) => TechCard(tech, removeTech))}
             </StyledList>
           )}
-          {list.length === 0 && <h2>Você não tem tecnologias cadastradas</h2>}
+          {list.length === 0 && (
+            <h2>Você não possui tecnologias cadastradas</h2>
+          )}
         </section>
       </DashMain>
+
       <StyledModal
         isOpen={isOpen}
         onBackgroundClick={toggleModal}
@@ -94,10 +102,10 @@ export function DashPage({ noUser, userState }) {
       >
         <ModalHeader text="Cadastrar Tecnologia" />
         <NewTech
-          token={token}
           action={toggleModal}
-          newList={setList}
-          id={localUser}
+          // token={token}
+          // newList={setList}
+          // id={user}
         />
       </StyledModal>
     </>
