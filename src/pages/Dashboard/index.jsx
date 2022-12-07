@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { toast } from "react-toastify";
 import { Button } from "../../components/Button";
 import { TechCard } from "../../components/Tech";
-// import { api } from "../../services/api";
 import { HiOutlinePlus } from "react-icons/hi";
 import { ButtonHeader, ModalHeader } from "../../components/Header";
 import { StyledModal } from "../../components/Modal/style";
@@ -14,11 +12,7 @@ import { UserContext } from "../../Contexts/UserContext";
 import { TechContext } from "../../Contexts/TechContext";
 import { EditForm } from "../../components/Form/EditTech";
 
-//routes not working ???? they work when they want to
-
 export function DashPage() {
-  // const token = JSON.parse(window.localStorage.getItem("token"));
-  // const [list, setList] = useState([]);
   const { user } = useContext(UserContext);
   const { getInfo, list, removeTech, userInfo, logOut } =
     useContext(TechContext);
@@ -31,36 +25,7 @@ export function DashPage() {
       navigate("/login");
     }
     getInfo();
-
-    // async function getInfo() {
-    //   try {
-    //     if (user === true) {
-    //       console.log("au");
-    //     }
-    //     let info = await api.get(`/users/${user}`);
-
-    //     setList(info.data.techs);
-    //     setUserInfo(info.data);
-    //   } catch (err) {
-    //     toast.error(err.response.data.message);
-    //   }
-    // }
-    // }, [user, navigate, setUser, getInfo, userInfo]);
   }, []);
-
-  // async function removeTech(id) {
-  //   const headers = {
-  //     Authorization: `Bearer: ${token}`,
-  //   };
-  //   try {
-  //     await api.delete(`/users/techs/${id}`, { headers });
-  //     let newList = list.filter((tech) => tech.id !== id);
-  //     toast.success("Tech excluída com sucesso");
-  //     setList(newList);
-  //   } catch (err) {
-  //     toast.err(err.message);
-  //   }
-  // }
 
   function toggleModal(e, id, title) {
     setIsOpen(!isOpen);
@@ -108,12 +73,7 @@ export function DashPage() {
             onEscapeKeydown={toggleModal}
           >
             <ModalHeader text="Cadastrar Tecnologia" />
-            <NewTech
-              action={toggleModal}
-              // token={token}
-              // newList={setList}
-              // id={user}
-            />
+            <NewTech action={toggleModal} />
           </StyledModal>
         </>
       ) : (
@@ -128,9 +88,6 @@ export function DashPage() {
               action={toggleModal}
               techID={edit.id}
               title={edit.title}
-
-              // token={token}
-              // newList={setList}
             />
           </StyledModal>
         </>
