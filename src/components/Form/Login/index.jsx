@@ -4,8 +4,11 @@ import { formSchema } from "./LoginSchema";
 import { Input } from "../../Input/input";
 import { StyledForm } from "../style";
 import { Button } from "../../Button";
+import { useContext } from "react";
+import { UserContext } from "../../../Contexts/UserContext";
 
-export function LoginForm({ loginUser, load }) {
+export function LoginForm() {
+  const { loginUser, load } = useContext(UserContext);
   const {
     register,
     handleSubmit,

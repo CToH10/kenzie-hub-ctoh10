@@ -71,6 +71,13 @@ export const StyledForm = styled.form`
     padding-bottom: clamp(5px, 1.5vh, 10px);
   }
 
+  input:disabled {
+    border: 1px solid var(--grey-1);
+    border-radius: 4px;
+    background-color: var(--grey-1);
+    color: var(--grey-0);
+  }
+
   select {
     border: 1px solid var(--grey-0);
     border-radius: 4px;

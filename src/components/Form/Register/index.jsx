@@ -4,8 +4,11 @@ import { formSchema } from "./RegisterSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../../Input/input";
 import { StyledForm } from "../style";
+import { useContext } from "react";
+import { UserContext } from "../../../Contexts/UserContext";
 
-export function RegisterForm({ onSubmit, load }) {
+export function RegisterForm({ onSubmit }) {
+  const { load } = useContext(UserContext);
   const {
     register,
     handleSubmit,
