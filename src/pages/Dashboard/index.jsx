@@ -12,24 +12,26 @@ import { DashMain, StyledList } from "./style";
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 import { TechContext } from "../../Contexts/TechContext";
+import { EditForm } from "../../components/Form/EditTech";
 
 //routes not working ???? they work when they want to
 
 export function DashPage() {
   // const token = JSON.parse(window.localStorage.getItem("token"));
   // const [list, setList] = useState([]);
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const { getInfo, list, removeTech, userInfo, logOut } =
     useContext(TechContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {
       navigate("/login");
-    } else {
-      getInfo();
     }
+    getInfo();
+
     // async function getInfo() {
     //   try {
     //     if (user === true) {
@@ -43,7 +45,8 @@ export function DashPage() {
     //     toast.error(err.response.data.message);
     //   }
     // }
-  }, [user, navigate, setUser, getInfo, userInfo]);
+    // }, [user, navigate, setUser, getInfo, userInfo]);
+  }, []);
 
   // async function removeTech(id) {
   //   const headers = {
@@ -59,11 +62,13 @@ export function DashPage() {
   //   }
   // }
 
-  function toggleModal(e) {
-    // console.log(e.target === "li" || e.target === "h3" || e.target === "p");
-    // let arr = [...e.nativeEvent.path];
-    // console.log(arr[0].localName);
+  function toggleModal(e, id, title) {
     setIsOpen(!isOpen);
+    if (e === "open") {
+      setEdit(true);
+    } else {
+      setEdit({ id: id, title: title });
+    }
   }
 
   return (
@@ -86,7 +91,7 @@ export function DashPage() {
         <section className="listTechs">
           {list.length !== 0 && (
             <StyledList>
-              {list.map((tech) => TechCard(tech, removeTech))}
+              {list.map((tech) => TechCard(tech, removeTech, toggleModal))}
             </StyledList>
           )}
           {list.length === 0 && (
@@ -95,19 +100,41 @@ export function DashPage() {
         </section>
       </DashMain>
 
-      <StyledModal
-        isOpen={isOpen}
-        onBackgroundClick={toggleModal}
-        onEscapeKeydown={toggleModal}
-      >
-        <ModalHeader text="Cadastrar Tecnologia" />
-        <NewTech
-          action={toggleModal}
-          // token={token}
-          // newList={setList}
-          // id={user}
-        />
-      </StyledModal>
+      {edit === true ? (
+        <>
+          <StyledModal
+            isOpen={isOpen}
+            onBackgroundClick={toggleModal}
+            onEscapeKeydown={toggleModal}
+          >
+            <ModalHeader text="Cadastrar Tecnologia" />
+            <NewTech
+              action={toggleModal}
+              // token={token}
+              // newList={setList}
+              // id={user}
+            />
+          </StyledModal>
+        </>
+      ) : (
+        <>
+          <StyledModal
+            isOpen={isOpen}
+            onBackgroundClick={toggleModal}
+            onEscapeKeydown={toggleModal}
+          >
+            <ModalHeader text="Editar Tecnologia" />
+            <EditForm
+              action={toggleModal}
+              techID={edit.id}
+              title={edit.title}
+
+              // token={token}
+              // newList={setList}
+            />
+          </StyledModal>
+        </>
+      )}
     </>
   );
 }

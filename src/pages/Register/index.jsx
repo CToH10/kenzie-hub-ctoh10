@@ -17,7 +17,7 @@ export function RegisterPage() {
   return (
     <>
       <ButtonHeader>
-        <Link to={"/login"}>Voltar</Link>
+        <Link to={"/login"}>Login</Link>
       </ButtonHeader>
       <FormsMain>
         <h2>Crie sua conta</h2>

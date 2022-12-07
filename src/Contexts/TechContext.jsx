@@ -36,6 +36,7 @@ export function TechProvider({ children }) {
       let addProcess = await api.post("/users/techs", techBody, headers);
       // let upList = await api.get(`/users/${user}`);
       if (addProcess.status === 201) {
+        getInfo();
         toast.success("Tecnologia adicionada");
         // setList(upList.data.techs);
       }
@@ -51,9 +52,10 @@ export function TechProvider({ children }) {
     };
     try {
       await api.delete(`/users/techs/${id}`, { headers });
-      let newList = list.filter((tech) => tech.id !== id);
+      // let newList = list.filter((tech) => tech.id !== id);
+      getInfo();
       toast.success("Tech excluída com sucesso");
-      setList(newList);
+      // setList(newList);
     } catch (err) {
       toast.err(err.message);
     }
@@ -64,10 +66,11 @@ export function TechProvider({ children }) {
       Authorization: `Bearer: ${token}`,
     };
     try {
-      await api.put(`/users/techs/${id}`, { body }, { headers });
+      await api.put(`/users/techs/${id}`, body, { headers });
+      getInfo();
       toast.success("Tech editada com sucesso");
     } catch (err) {
-      toast.err(err.message);
+      toast.error(err.message);
     }
   }
 

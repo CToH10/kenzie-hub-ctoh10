@@ -15,8 +15,11 @@ export function UserProvider({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
     setUser(JSON.parse(window.localStorage.getItem("userID")));
-  }, [user]);
+  }, [user, navigate]);
 
   async function loginUser(body) {
     setLoad(true);

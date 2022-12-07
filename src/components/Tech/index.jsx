@@ -1,13 +1,20 @@
 import React from "react";
 import { Button } from "../Button";
-import { EditForm } from "../Form/EditTech";
+import { HiPencil } from "react-icons/hi";
 
-export function TechCard({ title, status, id }, remove) {
+export function TechCard({ title, status, id }, remove, open) {
   return (
-    <li key={id} onClick={() => EditForm({ title, status, id })}>
+    <li key={id}>
       <h3>{title}</h3>
       <p>{status}</p>
-      <Button action={() => remove(id)} />
+      <section className="buttons">
+        <Button
+          id={id}
+          action={(e) => open(e, id, title)}
+          text={<HiPencil color="white" />}
+        />
+        <Button action={() => remove(id)} />
+      </section>
     </li>
   );
 }

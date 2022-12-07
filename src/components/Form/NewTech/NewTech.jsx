@@ -63,7 +63,7 @@ export function NewTech({ action }) {
       )}
       <label htmlFor="status">Status</label>
 
-      <select user="status" {...register("status")}>
+      <select id="status" {...register("status")}>
         <option value="">Status de conhecimento</option>
         <option value="Interesse">Interesse</option>
         <option value="Iniciante">Iniciante</option>
