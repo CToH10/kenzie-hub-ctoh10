@@ -47,6 +47,10 @@ export const DashMain = styled(StyledMain)`
     border: 1px solid var(--grey-2);
     background-color: var(--grey-2);
   }
+
+  .listTechs h2 {
+    color: var(--grey-1);
+  }
 `;
 
 export const StyledList = styled.ul`
