@@ -1,13 +1,18 @@
+import { StyledApp } from "./AppStyle";
+import { TechProvider } from "./Contexts/TechContext";
+import { UserProvider } from "./Contexts/UserContext";
 import { RoutesComp } from "./routes";
 
 function App() {
   window.document.title = "KenzieHub";
   return (
-    <div className="App">
-      <header className="App-header">
-        <RoutesComp />
-      </header>
-    </div>
+    <StyledApp className="App">
+      <UserProvider>
+        <TechProvider>
+          <RoutesComp />
+        </TechProvider>
+      </UserProvider>
+    </StyledApp>
   );
 }
 

@@ -20,7 +20,7 @@ root.render(
           position="bottom-right"
           autoClose={2000}
           hideProgressBar={true}
-          newestOnTop={false}
+          newestOnTop
           closeOnClick
           rtl={false}
           pauseOnFocusLoss

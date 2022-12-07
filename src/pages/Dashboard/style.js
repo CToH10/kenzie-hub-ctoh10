@@ -86,18 +86,28 @@ export const StyledList = styled.ul`
   }
 
   li:hover,
-  p :hover {
+  p:hover {
     background-color: var(--grey-2);
     color: var(--grey-0);
+  }
+
+  .buttons {
+    display: flex;
+    gap: 3px;
   }
 
   button {
     border: none;
     border-radius: 4px;
-    background-color: inherit;
-    width: 10vw;
+    background-color: var(--grey-3);
+    width: 4vw;
+    min-width: 24px;
     height: 4vh;
     max-width: 40px;
     max-height: 30px;
+  }
+
+  button:hover {
+    background-color: var(--grey-4);
   }
 `;
